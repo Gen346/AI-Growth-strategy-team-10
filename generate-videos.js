@@ -4,6 +4,7 @@ import { writeFile } from 'fs/promises';
 import fetch from 'node-fetch';
 import readline from 'readline';
 import * as fs from 'fs';
+import * as readline from 'node:readline/promises';
 
 const apiKey = process.env.GEMINI_API_KEY;
 if (!apiKey) {
