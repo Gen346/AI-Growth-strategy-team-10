@@ -33,13 +33,16 @@
 
 .prompt-input {
     width: 100%;
-    height: auto;
-    align-items: center;
-    padding: 20px;
+    box-sizing: border-box;
+    height: 48px;
+    padding: 10px 14px;
     margin-bottom: 20px;
     border: 3px solid #6889D1;
     border-radius: 10px;
     font-size: 16px;
+    line-height: 1.2;
+    background-color: #333;
+    color: #fff;
 }
 
 .upload-area {
