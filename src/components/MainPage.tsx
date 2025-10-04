@@ -10,7 +10,7 @@ const MainPage: React.FC = () => {
   };
 
   const handleAnalyzeCompetitors = () => {
-    console.log('Navigate to analyze competitors page');
+    navigate('/competitors');
   };
 
   const handlePolicyCheck = () => {

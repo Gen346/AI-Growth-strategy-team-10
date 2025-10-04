@@ -17,9 +17,8 @@ interface VideoGenerationProgress {
   message: string;
 }
 
-// Create a simple colored video as fallback
 const createFallbackVideo = async (aspectRatio: '16:9' | '9:16', durationSeconds: number): Promise<string> => {
-  // Create a canvas with the appropriate aspect ratio
+  
   const canvas = document.createElement('canvas');
   const width = aspectRatio === '16:9' ? 640 : 360;
   const height = aspectRatio === '16:9' ? 360 : 640;
@@ -32,8 +31,8 @@ const createFallbackVideo = async (aspectRatio: '16:9' | '9:16', durationSeconds
   }
   
   const gradient = ctx.createLinearGradient(0, 0, width, height);
-  gradient.addColorStop(0, '#ff9500');  // Orange (matching your UI)
-  gradient.addColorStop(1, '#ff5e3a');  // Red-orange
+  gradient.addColorStop(0, '#ff9500');
+  gradient.addColorStop(1, '#ff5e3a');
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, width, height);
   
@@ -45,7 +44,7 @@ const createFallbackVideo = async (aspectRatio: '16:9' | '9:16', durationSeconds
   ctx.fillText('Video generation failed', width / 2, height / 2 + 20);
   ctx.fillText(`Aspect ratio: ${aspectRatio}`, width / 2, height / 2 + 50);
   
-//   const dataUrl = canvas.toDataURL('image/png');
+  
   
   const video = document.createElement('video');
   video.width = width;
@@ -84,11 +83,6 @@ export const generateVideoFromImage = async (
   config: VideoGenerationConfig,
   onProgress: (progress: VideoGenerationProgress) => void
 ): Promise<string | null> => {
-  // Vite only exposes env vars that start with VITE_ to the client bundle.
-  // For local dev create a file named `.env.local` (or `.env`) with:
-  // VITE_GEMINI_API_KEY=your_api_key_here
-  // Then restart the dev server.
-  // IMPORTANT: Do NOT expose secrets in client-side code in production — use a server-side proxy.
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.GEMINI_API_KEY;
   console.log('Environment variables available:', Object.keys(import.meta.env));
   console.log('Using GEMINI API key present:', !!apiKey);
@@ -132,9 +126,7 @@ export const generateVideoFromImage = async (
         aspectRatio: config.aspectRatio,
         durationSeconds: config.durationSeconds,
         personGeneration: PersonGeneration.ALLOW_ADULT,
-        // audio: config.includeAudio ? {
-        //   audioDescription: config.audioDescription,
-        // } : undefined,
+        
       },
     });
 

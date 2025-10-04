@@ -19,16 +19,16 @@ const CompetitorContentPage: React.FC = () => {
   const [videos, setVideos] = useState<AdVideo[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [platform, setPlatform] = useState<'facebook' | 'tiktok'>('facebook');
-  // const [search, setSearch] = useState(''); // Not used
+  
   const [url, setUrl] = useState('');
 
-  // Імітація бекенд-скрипта: надсилаємо посилання, отримуємо новий ads-results.json
+  
   const handleFetch = async () => {
     setLoading(true);
     setError(null);
     setVideos([]);
     try {
-      // 1. POST на бекенд для очищення і запуску скрапінгу
+      
       const scrapeRes = await fetch('/api/scrape', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -38,9 +38,9 @@ const CompetitorContentPage: React.FC = () => {
         const err = await scrapeRes.json();
         throw new Error(err.error || 'Помилка запуску скрапінгу');
       }
-      // 2. Чекаємо ~2-3 сек щоб скрипт встиг оновити ads-results.json
+      
       await new Promise(res => setTimeout(res, 3000));
-      // 3. Підтягуємо новий ads-results.json
+      
       const res = await fetch('/ads-results.json?_=' + Date.now());
       if (!res.ok) throw new Error('Не вдалося завантажити ads-results.json');
       const data: AdVideo[] = await res.json();

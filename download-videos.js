@@ -2,16 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import https from 'https';
 
-// Файл з JSON-результатами (заміни на свій шлях)
 const jsonFile = './ads-results.json';
-// Папка для збереження відео
 const outputDir = './creatives';
 
 if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir);
 }
 
-// Завантаження відео за URL
 function downloadVideo(url, filename) {
     return new Promise((resolve, reject) => {
         const file = fs.createWriteStream(filename);

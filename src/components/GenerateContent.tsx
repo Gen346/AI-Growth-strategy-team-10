@@ -106,7 +106,7 @@ const GenerateContent: React.FC = () => {
           setProgress(progressData.progress);
           setStatusMessage(progressData.message);
           
-          // If the message indicates we're using a fallback video, show a warning
+          
           if (progressData.message.includes('fallback') || progressData.message.includes('failed')) {
             setError('Video generation failed. Using fallback video instead.');
           }
@@ -131,9 +131,9 @@ const GenerateContent: React.FC = () => {
   const handleDownload = () => {
     if (!videoUrl) return;
     
-    // Check if the video URL is a blob URL or a file path
+    
     if (videoUrl.startsWith('blob:')) {
-      // It's a blob URL, use the existing download code
+      
       const link = document.createElement('a');
       link.href = videoUrl;
       link.download = `generated-video-${Date.now()}.mp4`;
@@ -141,7 +141,7 @@ const GenerateContent: React.FC = () => {
       link.click();
       document.body.removeChild(link);
     } else {
-      // It's a file path, we need to fetch it first
+      
       fetch(videoUrl)
         .then(response => response.blob())
         .then(blob => {
@@ -162,7 +162,7 @@ const GenerateContent: React.FC = () => {
   };
 
   const handlePolicyCheck = () => {
-    // Implement policy compliance check functionality
+    
     console.log('Policy compliance check');
   };
 
