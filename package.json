@@ -7,12 +7,22 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test-genai": "node test-genai.js",
+    "generate-images": "node generate-images.js",
+    "generate-videos": "node generate-videos.js",
+    "generate-videos-replicate": "node generate-videos-replicate.js",
+    "generate-video-descriptions": "node generate-video-descriptions.js",
+    "generate-videos-from-image": "node generate-videos-from-image.js",
+    "generate-videos-simple": "node generate-videos-simple.js"
   },
   "dependencies": {
     "@google/genai": "^1.22.0",
+    "dotenv": "^17.2.3",
+    "node-fetch": "^3.3.2",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "replicate": "^1.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
