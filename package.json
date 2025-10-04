@@ -18,10 +18,12 @@
   },
   "dependencies": {
     "@google/genai": "^1.22.0",
+    "apify": "^3.4.5",
     "dotenv": "^17.2.3",
     "node-fetch": "^3.3.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.3",
     "replicate": "^1.2.0"
   },
   "devDependencies": {
