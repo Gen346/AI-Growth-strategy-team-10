@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
+import logo from '../assets/logo.png';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const MainPage: React.FC = () => {
   return (
     <div className="main-page">
       <div className="logo-container">
-        <div className="blue-circle"></div>
+        <img src={logo} alt="Staycast logo" className="logo-image" />
       </div>
       
       <div className="welcome-text">

@@ -14,12 +14,18 @@
   margin-bottom: 2rem;
 }
 
-.blue-circle {
-  width: 250px;
-  height: 250px;
-  background-color: #6b8cde;
+.logo-image {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
   border-radius: 50%;
+  /* no border requested */
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  display: block;
   margin: 0 auto;
+  padding: 0;
 }
 
 .welcome-text {

@@ -11,21 +11,21 @@ export default defineConfig({
       name: 'dev-scrape-runner',
       configureServer(server) {
         if (!server) return;
-        server.middlewares.use('/api/scrape', (req, res, next) => {
+        server.middlewares.use('/api/scrape', (req: any, res: any, next: any) => {
           if (req.method !== 'POST') return next();
           let body = '';
-          req.on('data', (chunk) => { body += chunk; });
+          req.on('data', (chunk: any) => { body += chunk; });
           req.on('end', async () => {
             try {
               const { url } = JSON.parse(body || '{}');
               if (!url) return res.writeHead(400).end(JSON.stringify({ error: 'No url provided' }));
               fs.writeFileSync('ads-results.json', '[]', 'utf-8');
-              exec(`node ads-scraper.js "${url}"`, (err, _stdout, stderr) => {
+              exec(`node ads-scraper.js "${url}"`, (err: any, _stdout: any, stderr: any) => {
                 if (err) {
                   return res.writeHead(500).end(JSON.stringify({ error: stderr || err.message }));
                 }
                 // after scraping, run downloader to fetch videos
-                exec(`node download-videos.js`, (err2, _stdout2, stderr2) => {
+                exec(`node download-videos.js`, (err2: any, _stdout2: any, stderr2: any) => {
                   if (err2) {
                     return res.writeHead(500).end(JSON.stringify({ error: stderr2 || err2.message }));
                   }

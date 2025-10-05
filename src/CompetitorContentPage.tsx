@@ -16,8 +16,6 @@ interface AdVideo {
 
 const CompetitorContentPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState<number>(0);
-  const [statusMessage, setStatusMessage] = useState<string>('');
   const [videos, setVideos] = useState<AdVideo[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [platform, setPlatform] = useState<'facebook' | 'tiktok'>('facebook');
@@ -27,8 +25,6 @@ const CompetitorContentPage: React.FC = () => {
   
   const handleFetch = async () => {
     setLoading(true);
-    setProgress(0);
-    setStatusMessage('Starting scraping...');
     setError(null);
     setVideos([]);
     try {
@@ -42,43 +38,20 @@ const CompetitorContentPage: React.FC = () => {
         const err = await scrapeRes.json();
         throw new Error(err.error || 'Помилка запуску скрапінгу');
       }
-      // Poll public/ads-results.json until videos appear or timeout
-      const maxAttempts = 30; // ~60s
-      let attempt = 0;
-      let found = false;
-      while (attempt < maxAttempts) {
-        attempt++;
-        setProgress(Math.round((attempt / maxAttempts) * 90));
-        setStatusMessage(`Waiting for results... (attempt ${attempt}/${maxAttempts})`);
-        try {
-          const res2 = await fetch('/ads-results.json?_=' + Date.now());
-          if (res2.ok) {
-            const data: AdVideo[] = await res2.json();
-            const withVideos = data.filter(
-              (ad) => ad.snapshot && ad.snapshot.videos && ad.snapshot.videos.length > 0
-            );
-            if (withVideos.length > 0) {
-              setVideos(withVideos);
-              found = true;
-              setProgress(100);
-              setStatusMessage('Results ready');
-              break;
-            }
-          }
-        } catch (e) {
-          // ignore transient errors while polling
-        }
-        await new Promise(res => setTimeout(res, 2000));
-      }
-      if (!found) {
-        throw new Error('Не вдалося отримати результати вчасно');
-      }
+      
+      await new Promise(res => setTimeout(res, 3000));
+      
+      const res = await fetch('/ads-results.json?_=' + Date.now());
+      if (!res.ok) throw new Error('Не вдалося завантажити ads-results.json');
+      const data: AdVideo[] = await res.json();
+      const withVideos = data.filter(
+        (ad) => ad.snapshot && ad.snapshot.videos && ad.snapshot.videos.length > 0
+      );
+      setVideos(withVideos);
     } catch (e: any) {
       setError(e.message || 'Сталася помилка');
     } finally {
       setLoading(false);
-      setStatusMessage('');
-      setProgress(0);
     }
   };
 
@@ -228,10 +201,10 @@ const CompetitorContentPage: React.FC = () => {
         {loading && (
           <div style={{ margin: '24px 0', width: 320 }}>
             <div style={{ width: '100%', height: 8, background: '#eee', borderRadius: 4, overflow: 'hidden' }}>
-              <div style={{ width: `${progress}%`, height: '100%', background: '#4b9cff', transition: 'width 300ms' }} />
+              <div style={{ width: '100%', height: '100%', background: '#4b9cff', animation: 'progress 1s linear infinite' }} />
             </div>
             <style>{`@keyframes progress { 0%{width:0;} 100%{width:100%;} }`}</style>
-            <div style={{ marginTop: 8, color: '#fff' }}>{statusMessage || 'Завантаження...'}</div>
+            <div style={{ marginTop: 8, color: '#fff' }}>Завантаження...</div>
           </div>
         )}
         {error && <div style={{ color: 'red', margin: '16px 0' }}>{error}</div>}
