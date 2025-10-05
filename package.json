@@ -1,13 +1,10 @@
 {
-  "homepage": "https://gen346.github.io/AI-Growth-strategy-team-10/",
   "name": "ai-growth-strategy-team-10",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run build",
-    "deploy":"gh-pages -d dist",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
