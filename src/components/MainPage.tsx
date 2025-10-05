@@ -25,7 +25,7 @@ const MainPage: React.FC = () => {
       </div>
       
       <div className="welcome-text">
-        <h1>Welcome to <span className="highlight">Staycast</span></h1>
+        <h1>Welcome to <span className="highlight">Slaycast</span></h1>
         <p className="tagline">Create once. Stay everywhere.</p>
       </div>
       

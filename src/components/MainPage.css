@@ -14,18 +14,12 @@
   margin-bottom: 2rem;
 }
 
-.logo-image {
-  width: 220px;
-  height: 220px;
-  object-fit: cover;
+.blue-circle {
+  width: 250px;
+  height: 250px;
+  background-color: #6b8cde;
   border-radius: 50%;
-  /* no border requested */
-  border: none;
-  box-shadow: none;
-  background: transparent;
-  display: block;
   margin: 0 auto;
-  padding: 0;
 }
 
 .welcome-text {
@@ -59,6 +53,17 @@
   max-width: 300px;
 }
 
+/* Make button sizes and spacing consistent on the main page */
+.main-page .action-buttons .analyze-button,
+.main-page .action-buttons .generate-button,
+.main-page .action-buttons .policy-button,
+.main-page .action-buttons .generate-button-yellow {
+  padding: 12px 18px; /* consistent padding */
+  margin: 0; /* remove any margin from other styles */
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .action-buttons button {
   padding: 0.8rem 1.5rem;
   border-radius: 15px;
@@ -80,14 +85,15 @@
   color: white;
 }
 
-.generate-button {
+.main-page .action-buttons .generate-button {
   background-color: transparent;
-  border: 2px solid #f8b500;
+  border: 2px solid #ffa600;
   color: #333;
+  box-shadow: none;
 }
 
-.generate-button:hover {
-  background-color: #f8b500;
+.main-page .action-buttons .generate-button:hover {
+  background-color: #ffa600;
   color: white;
 }
 
