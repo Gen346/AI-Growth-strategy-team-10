@@ -41,5 +41,4 @@ export default defineConfig({
       }
     }
   ],
-  base: '/AI-Growth-strategy-team-10/'  // Додано для GitHub Pages
 })
