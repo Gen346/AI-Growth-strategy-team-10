@@ -82,6 +82,11 @@ const CompetitorContentPage: React.FC = () => {
     }
   };
 
+  const handleGetCompetitorVideos = async () => {
+    // alias to existing fetch logic - kept separate for clarity/analytics if needed
+    await handleFetch();
+  };
+
   return (
     <>
       <style>{`
@@ -199,14 +204,24 @@ const CompetitorContentPage: React.FC = () => {
           onChange={e => setUrl(e.target.value)}
           style={{ width: 320, padding: 12, borderRadius: 8, border: '1px solid #ccc', marginBottom: 32, fontSize: 16, background: '#f8f8f8', color: '#333' }}
         />
-        <button
-          onClick={handleFetch}
-          className="competitor-btn"
-          style={{ width: 320, padding: 16, borderRadius: 8, background: '#ffb800', color: '#222', fontWeight: 700, fontSize: 18, border: 'none', cursor: 'pointer', marginTop: 12 }}
-          disabled={loading || !url}
-        >
-          generate similar content
-        </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 12 }}>
+          <button
+            onClick={handleGetCompetitorVideos}
+            className="competitor-btn"
+            style={{ width: 320, padding: 16, borderRadius: 8, background: '#4b9cff', color: '#fff', fontWeight: 700, fontSize: 18, border: 'none', cursor: 'pointer' }}
+            disabled={loading || !url}
+          >
+            get competitor videos
+          </button>
+          <button
+            onClick={handleFetch}
+            className="competitor-btn"
+            style={{ width: 320, padding: 16, borderRadius: 8, background: '#ffb800', color: '#222', fontWeight: 700, fontSize: 18, border: 'none', cursor: 'pointer' }}
+            disabled={loading || !url}
+          >
+            generate similar content
+          </button>
+        </div>
       </div>
   <div className="competitor-results">
         <h2 style={{ color: '#fff', fontWeight: 600, fontSize: 24, marginBottom: 32 }}>Results</h2>
